@@ -4,6 +4,7 @@ require("dotenv-flow").config();
 import cors from "cors";
 import express, { Response } from "express";
 
+import * as controllers from "./controllers";
 import { db } from "./db";
 
 const PORT = process.env.PORT || 5000;
@@ -14,6 +15,8 @@ app.use(cors());
 app.get("/", (_, res: Response) => {
   res.status(200).json({ health: true });
 });
+
+app.use("/collections", controllers.collections);
 
 db.connect()
   .then(() => console.log("Database connection open"))
