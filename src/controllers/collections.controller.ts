@@ -12,9 +12,9 @@ router.get("/", (_, res: Response) =>
   )
 );
 
-const SELECT_COLLECTION_ITEMS = "SELECT * FROM items WHERE collection_id = $1";
-router.get("/:collectionId/items", (req: Request, res: Response) =>
-  db.query(SELECT_COLLECTION_ITEMS, [req.params.collectionId]).then(
+const SELECT_COLLECTION = "SELECT * FROM items WHERE contract = $1";
+router.get("/:contract", (req: Request, res: Response) =>
+  db.query(SELECT_COLLECTION, [req.params.contract]).then(
     ({ rows }) => res.status(200).json(rows),
     (error) => res.status(500).send(error.message)
   )
