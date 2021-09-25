@@ -20,7 +20,7 @@ app.use("/collections", controllers.collections);
 app.use("/floor_price", controllers.floor_price);
 app.use("/bid_price", controllers.bid_price);
 app.use("/sell_price", controllers.sell_price);
-app.use("/latest_listings", controllers.latest_listings);
+app.use("/bot_list", controllers.bot_list);
 
 db.connect()
   .then(() => console.log("Database connection open"))
