@@ -4,7 +4,7 @@ import { db } from "../db";
 
 const router = Router();
 
-const SELECT_SELL_PRICE = "SELECT MIN(floor_price) AS \"Floor_Price\" FROM lasc_floor_prices";
+const SELECT_SELL_PRICE = "SELECT MIN(floor_price) AS \"Sell_Price\" FROM lasc_floor_prices";
 router.get("/", (_, res: Response) =>
     db.query(SELECT_SELL_PRICE).then(
         ({ rows }) => res.status(200).json(rows),
