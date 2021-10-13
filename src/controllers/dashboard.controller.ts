@@ -13,8 +13,8 @@ router.get("/", (_, res: Response) =>
 );
 
 const SELECT_LAST_SALE_PRICE =
-    "SELECT token_id, last_sale_price, last_sale_date FROM last_sale_price WHERE contract_address = $1";
-router.get("/:contract_address", (req: Request, res: Response) =>
+    "SELECT contract_address, token_id, last_sale_price, last_sale_date FROM last_sale_price WHERE contract_address = $1";
+router.get("/:contract_address/last_sale_price", (req: Request, res: Response) =>
     db.query(SELECT_LAST_SALE_PRICE, [req.params.contract_address]).then(
         ({ rows }) => res.status(200).json(rows),
         (error) => res.status(500).send(error.message)
