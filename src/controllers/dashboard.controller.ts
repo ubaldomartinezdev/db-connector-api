@@ -21,4 +21,13 @@ router.get("/:contract_address/last_sale_price", (req: Request, res: Response) =
     )
 );
 
+const SELECT_COLLECTIONS =
+    "SELECT * FROM collections;";
+router.get("/collections", (req: Request, res: Response) =>
+    db.query(SELECT_COLLECTIONS).then(
+        ({ rows }) => res.status(200).json(rows),
+        (error) => res.status(500).send(error.message)
+    )
+);
+
 export { router as dashboard };
