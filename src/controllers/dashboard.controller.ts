@@ -12,4 +12,4 @@ router.get("/", (_, res: Response) =>
     )
 );
 
-export { router as collections };
+export { router as dashboard };
