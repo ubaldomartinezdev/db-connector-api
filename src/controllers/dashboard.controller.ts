@@ -12,6 +12,15 @@ router.get("/", (_, res: Response) =>
     )
 );
 
+const SELECT_ALL_LAST_SALE_PRICE =
+    "SELECT contract_address, token_id, last_sale_price, last_sale_date FROM last_sale_price WHERE last_sale_date != '-1' ORDER BY last_sale_date DESC";
+router.get("/last_sale_price", (req: Request, res: Response) =>
+    db.query(SELECT_ALL_LAST_SALE_PRICE).then(
+        ({ rows }) => res.status(200).json(rows),
+        (error) => res.status(500).send(error.message)
+    )
+);
+
 const SELECT_LAST_SALE_PRICE =
     "SELECT contract_address, token_id, last_sale_price, last_sale_date FROM last_sale_price WHERE contract_address = $1 AND last_sale_date != '-1' ORDER BY last_sale_date DESC";
 router.get("/:contract_address/last_sale_price", (req: Request, res: Response) =>
