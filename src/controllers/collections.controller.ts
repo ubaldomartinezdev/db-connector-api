@@ -13,6 +13,24 @@ router.get("/", (_, res: Response) =>
   )
 );
 
+const SELECT_SELL_PRICE =
+  "SELECT sell_price FROM collections WHERE contract_address = $1";
+router.get("/sell_price/:contract_address", (req: Request, res: Response) =>
+  db.query(SELECT_SELL_PRICE, [req.params.contract_address]).then(
+    ({ rows }) => res.status(200).json(rows),
+    (error) => res.status(500).send(error.message)
+  )
+);
+
+const SELECT_BID_PRICE =
+  "SELECT bid_price FROM collections WHERE contract_address = $1";
+router.get("/bid_price/:contract_address", (req: Request, res: Response) =>
+  db.query(SELECT_BID_PRICE, [req.params.contract_address]).then(
+    ({ rows }) => res.status(200).json(rows),
+    (error) => res.status(500).send(error.message)
+  )
+);
+
 const SELECT_COLLECTION =
   "SELECT token_id FROM bot_list WHERE contract_address = $1";
 router.get("/:contract_address", (req: Request, res: Response) =>
@@ -34,24 +52,6 @@ router.get("/:contract_address/:label", (req: Request, res: Response) =>
       ({ rows }) => res.status(200).json(rows),
       (error) => res.status(500).send(error.message)
     )
-);
-
-const SELECT_SELL_PRICE =
-  "SELECT sell_price FROM collections WHERE contract_address = $1";
-router.get("/:contract_address/sell_price", (req: Request, res: Response) =>
-  db.query(SELECT_SELL_PRICE, [req.params.contract_address]).then(
-    ({ rows }) => res.status(200).json(rows),
-    (error) => res.status(500).send(error.message)
-  )
-);
-
-const SELECT_BID_PRICE =
-  "SELECT bid_price FROM collections WHERE contract_address = $1";
-router.get("/:contract_address/bid_price", (req: Request, res: Response) =>
-  db.query(SELECT_BID_PRICE, [req.params.contract_address]).then(
-    ({ rows }) => res.status(200).json(rows),
-    (error) => res.status(500).send(error.message)
-  )
 );
 
 export { router as collections };
