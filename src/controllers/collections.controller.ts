@@ -21,6 +21,15 @@ router.get("/:contract_address", (req: Request, res: Response) =>
   )
 );
 
+const SELECT_COLLECTION_LABEL =
+    "SELECT token_id FROM bot_list WHERE contract_address = $1 AND label = $2";
+router.get("/:contract_address/:label", (req: Request, res: Response) =>
+    db.query(SELECT_COLLECTION_LABEL, [req.params.contract_address, req.params.label]).then(
+        ({ rows }) => res.status(200).json(rows),
+        (error) => res.status(500).send(error.message)
+    )
+);
+
 const SELECT_SELL_PRICE =
   "SELECT sell_price FROM collections WHERE contract_address = $1";
 router.get("/:contract_address/sell_price", (req: Request, res: Response) =>
