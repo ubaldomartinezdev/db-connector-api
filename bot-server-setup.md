@@ -18,6 +18,7 @@ git clone https://github.com/nft-crew/db-connector-api.git
 git clone https://github.com/nft-crew/bot-connector-api.git
 git clone https://github.com/nft-crew/bot.git
 
+# Github auth to clone repos #
 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
 
 sudo npm install pm2 -g
