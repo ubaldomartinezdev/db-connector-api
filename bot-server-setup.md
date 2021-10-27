@@ -21,25 +21,28 @@ git clone https://github.com/nft-crew/bot.git
 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
 
 sudo npm install pm2 -g
+
+source ~/.nvm/nvm.sh
+
+# Run only if any of the processes have been started before #
+npm cache clean --force
+pm2 flush
+
 cd db-connector-api
+nvm i v14.18.1
 npm i
 npm run build
 pm2 start npm --name "db connector" -- start
 
 cd db-connector-bot
+nvm i v14.18.1
 npm i
 npm run build
 pm2 start npm --name "bot connector" -- start
 
-cd bot
-source ~/.nvm/nvm.sh
-nvm i v14.18.1
-npm cache clean --force
-npm run build
-
-pm2 flush
 cd db-connector-api
-git pull
+nvm i v14.18.1
+npm i
 npm run build
 pm2 start npm --name "bot" -- start
 ```
