@@ -19,7 +19,7 @@ app.get("/", (_, res: Response) => {
 app.use("/collections", controllers.collections);
 app.use("/dashboard", controllers.dashboard);
 app.use("/prices", controllers.prices);
-app.use("/projectList", controllers.projectList);
+app.use("/p", controllers.p);
 
 db.connect()
   .then(() => console.log("Database connection open"))
